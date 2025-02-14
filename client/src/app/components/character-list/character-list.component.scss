@@ -1,0 +1,103 @@
+@import '../../../styles/var.scss';
+
+#carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+
+    #carousel-inner {
+        display: flex;
+        align-items: stretch;
+        cursor: pointer;
+        height: 160px;
+        width: 75%;
+        margin: 0px;
+        padding: 0px;
+        position: relative;
+        perspective: 1000px;
+
+        .card-character {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: $gray-transparent-2;
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease-in-out;
+
+            img {
+                height: 100%;
+                width: 100%;
+
+                &:hover {
+                    border: 3px solid #fff;
+                }
+            }
+            .available-false {
+                filter: grayscale(10);
+                opacity: 0.7;
+                &:hover {
+                    border: none;
+                }
+            }
+        }
+    }
+
+    .carousel-button {
+        cursor: pointer;
+        border-radius: 50%;
+        border: none;
+        background-color: $gray-transparent-2;
+        font-size: 40px;
+        display: flex;
+        width: 60px;
+        height: 60px;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.5s ease-in-out;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}
+
+.card-character:nth-child(1) {
+    transform: scale(0.6) translateX(250px) rotateY(45deg);
+    z-index: 1;
+}
+
+.card-character:nth-child(2) {
+    transform: scale(0.75) translateX(100px) rotateY(30deg);
+    z-index: 2;
+}
+
+.card-character:nth-child(3) {
+    transform: scale(0.9) translateX(25px) rotateY(15deg);
+    z-index: 3;
+}
+
+.card-character:nth-child(4) {
+    transform: scale(1) rotateY(0deg);
+    z-index: 4;
+    animation: bounce 3s ease-in-out infinite;}
+
+.card-character:nth-child(5) {
+    transform: scale(0.9) translateX(-25px) rotateY(-15deg);
+    z-index: 3;
+}
+
+.card-character:nth-child(6) {
+    transform: scale(0.75) translateX(-100px) rotateY(-30deg);
+    z-index: 2;
+}
+
+.card-character:nth-child(7) {
+    transform: scale(0.6) translateX(-250px) rotateY(-45deg);
+    z-index: 1;
+}

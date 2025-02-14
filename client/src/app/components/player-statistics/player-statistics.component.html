@@ -1,0 +1,49 @@
+<h2>Résumé de la partie</h2>
+<table mat-table [dataSource]="dataSource" matSort matSortActive="playerName" matSortDisableClear matSortDirection="asc">
+    <ng-container matColumnDef="playerName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Joueurs</th>
+        <td id="player-name" mat-cell *matCellDef="let element">{{ element.playerName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="numberOfFights">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Combats</th>
+        <td mat-cell *matCellDef="let element">{{ element.numberOfFights }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="numberOfEscapes">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Évasions</th>
+        <td mat-cell *matCellDef="let element">{{ element.numberOfEscapes }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="numberOfWins">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Victoires</th>
+        <td mat-cell *matCellDef="let element">{{ element.numberOfWins }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="numberOfDefeats">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Défaites</th>
+        <td mat-cell *matCellDef="let element">{{ element.numberOfDefeats }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="totalHealthLost">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Dégats subis</th>
+        <td mat-cell *matCellDef="let element">{{ element.totalHealthLost }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="totalDamageDealt">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Dégats infligés</th>
+        <td mat-cell *matCellDef="let element">{{ element.totalDamageDealt }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="numberOfObjectsCollected">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Objets ramassés</th>
+        <td mat-cell *matCellDef="let element">{{ element.numberOfObjectsCollected }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="percentageOfMapTilesVisited">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>% Tuiles visitées</th>
+        <td mat-cell *matCellDef="let element">{{ element.percentageOfMapTilesVisited | number: '1.2-2' }}%</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

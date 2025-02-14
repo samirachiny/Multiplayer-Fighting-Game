@@ -1,0 +1,18 @@
+<div id="choose-item-container">
+    <h2>Selectionner l'item que vous souhaitez jeter</h2>
+    <div id="item-container">
+        @for (item of items; track $index) {
+        <div
+            class="item"
+            [ngClass]="{ 'item-selected': itemTypeSelected === item?.type }"
+            (click)="onSelectedItem(item)"
+            matTooltipClass="tile-tool-tip"
+            matTooltipPosition="above"
+            [matTooltip]="item?.description"
+        >
+            <img [src]="item?.image" alt="{{ item?.description }}" />
+        </div>
+        }
+    </div>
+    <button mat-button (click)="onChoiceDone()">Terminer</button>
+</div>

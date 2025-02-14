@@ -1,0 +1,15 @@
+export enum FightMessageEvent {
+    EscapeFailed = 'escapeFailed',
+    OpponentEscapeFailed = 'opponentEscapeFailed',
+    EscapeSuccessful = 'escapeSuccessful',
+    OpponentEscapeSuccessful = 'opponentEscapeSuccessful',
+    AttackSuccessful = 'attackSuccessful',
+    OpponentAttackSuccessful = 'opponentAttackSuccessful',
+    AttackFailed = 'attackFailed',
+    OpponentAttackFailed = 'opponentAttackFailed',
+    TurnStarted = 'turnStarted',
+    OpponentTurnStarted = 'opponentTurnStarted',
+    OpponentGaveUp = 'opponentGaveUp',
+    YouWon = 'youWon',
+    YouLost = 'youLost',
+}

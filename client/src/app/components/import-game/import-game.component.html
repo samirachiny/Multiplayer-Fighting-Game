@@ -1,0 +1,57 @@
+<button id="import-btn" matRipple [matRippleCentered]="true" (click)="openDialog()" mat-fab><mat-icon>publish</mat-icon></button>
+<ng-template #importGameDialog>
+    <div id="dialog-container">
+        <div id="form-info-container">
+            <h2>Importer un jeu</h2>
+            <form #form="ngForm" (ngSubmit)="onImportGame(form)" class="game-input">
+                <input
+                    type="file"
+                    [(ngModel)]="file"
+                    accept=".json"
+                    required
+                    [ngModelOptions]="{ standalone: true }"
+                    (change)="onFileChange($event)"
+                />
+                <button
+                    mat-button
+                    class="submit-btn"
+                    [ngClass]="{ 'btn-disabled': !game }"
+                    type="submit"
+                    matRipple
+                    [matRippleCentered]="true"
+                    [disabled]="!game"
+                >
+                    Importer
+                </button>
+            </form>
+            @if(game){
+            <h3>Informations du jeu</h3>
+            <div id="info-container">
+                <div class="info">
+                    <p>Name:</p>
+                    <input title="Name" class="form-input" type="text" [(ngModel)]="game.name" required maxlength="20" />
+                    <mat-icon>edit</mat-icon>
+                </div>
+                <div class="info">
+                    <p>Taille de la carte:</p>
+                    <p>{{ game.gameMap.length }}x{{ game.gameMap.length }}</p>
+                </div>
+                <div class="info">
+                    <p>Mode:</p>
+                    <p>@if(game.mode === 'Flag'){Drapeau<mat-icon>flag</mat-icon>} @else {Classique<mat-icon>shield</mat-icon>}</p>
+                </div>
+                <div class="info">
+                    <p>Description:</p>
+                    <p>{{ game.description }}</p>
+                </div>
+            </div>
+            }
+        </div>
+        @if(game){
+        <div id="map-container">
+            <h2>Carte du jeu</h2>
+            <canvas #map [height]="400" [width]="400"> </canvas>
+        </div>
+        }
+    </div>
+</ng-template>

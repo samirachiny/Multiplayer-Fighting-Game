@@ -1,0 +1,57 @@
+<div class="game-card" [ngClass]="{'not-visible': !game.isVisible}">
+    <mat-card>
+        <header class="card-game-header">
+            <h4>{{ game.name }}</h4>
+        </header>
+        <div class="image-container">
+            <img class="image" 
+            mat-card-image 
+            [src]="game.imageBase64" 
+            alt="image de prévisualisation du jeu"
+            [matTooltip]="game.description" matTooltipPosition="below" matTooltipClass="tooltip" />
+            <mat-icon title="{{ game.mode }}" class="overlay-icon">@if(game.mode==="Flag"){flag} @else {shield}
+            </mat-icon>
+        </div>
+        <mat-card-title class="card-title">
+            <span>{{ game.mapSize }}x{{ game.mapSize }} </span>
+            @if (isEditable) { <span>{{ game.lastEditDate | date: 'dd/MM/yyyy HH:mm' }}</span>
+            } @else {
+            <div class="information-party">
+                @for ( icon of iconsOptions; let index = $index ; track index) {
+                <span>
+                    <img [src]="icon" [matTooltip]="iconDescriptions[index]" matTooltipClass="tooltip" alt="icone infos">
+                    <p>
+                        {{ dataIcons[game.mapSize]}}
+                    </p>
+                </span>
+                }
+            </div>
+            }
+        </mat-card-title>
+        @if (isEditable) {
+        <div class="center">
+            <mat-card-actions class="card-actions">
+                <button matRipple [matRippleCentered]="true" id="edit-btn" type="button" title="Modifier jeu" mat-icon-button
+                    [routerLink]="['/edit-game', game.gid]">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button matRipple [matRippleCentered]="true" id="delete-btn" type="button" title="Supprimer jeu" mat-icon-button
+                    (click)="openDeleteConfirmation()">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button matRipple [matRippleCentered]="true" id="export-btn" type="button" title="Exporter un jeu" mat-icon-button (click)="onExportGame()">
+                    <mat-icon>download</mat-icon>
+                </button>
+                <button matRipple [matRippleCentered]="true" id="visibility-btn-{{ game.isVisible }}" type="button" title="Visibilité du jeu" mat-icon-button
+                    (click)="onHideGame()">
+                    <mat-icon>visibility@if(!game.isVisible){_off}</mat-icon>
+                </button>
+            </mat-card-actions>
+        </div>
+        } @else {
+        <div class="center">
+            <button matRipple [matRippleCentered]="true" id="selection-btn" type="button" (click)="onSelected()">sélectionner</button>
+        </div>
+        }
+    </mat-card>
+</div>

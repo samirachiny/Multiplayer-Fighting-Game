@@ -1,0 +1,46 @@
+@import '../../../styles/var.scss';
+
+h3 {
+    font-family: $font-itim;
+    font-size: 25px;
+    color: $brown-light;
+    text-align: center;
+    margin: 0px;
+    margin-bottom: 5px;
+}
+
+#tile-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 15px;
+    background-color: $brown-light;
+    padding: 15px;
+    border: 7px solid $brown-dark;
+}
+
+.tile-tool-tip {
+    color: $brown-light;
+    margin-left: 5px;
+    font-family: $font-itim;
+    background-color: $gray-transparent;
+}
+
+.tile-image,
+.tile-image-selected {
+    cursor: pointer;
+    width: 75px;
+    height: 75px;
+    transition: transform 0.1s ease-in-out;
+    border: 4px solid $brown-dark;
+}
+
+.tile-image:hover {
+    transform: scale(1.1);
+}
+
+.tile-image-selected {
+    transform: scale(1.2);
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

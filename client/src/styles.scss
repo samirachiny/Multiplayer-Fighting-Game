@@ -1,0 +1,174 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
+$indigo-pink-theme: mat.m2-define-light-theme(
+    (
+        color: (
+            primary: mat.m2-define-palette(mat.$m2-indigo-palette),
+            accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400),
+            warn: mat.m2-define-palette(mat.$m2-red-palette),
+        ),
+    )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($indigo-pink-theme);
+
+.deeppurple-amber-theme {
+    $deeppurple-amber-theme: mat.m2-define-light-theme(
+        (
+            color: (
+                primary: mat.m2-define-palette(mat.$m2-deep-purple-palette),
+                accent: mat.m2-define-palette(mat.$m2-amber-palette, A200, A100, A400),
+            ),
+        )
+    );
+    @include mat.all-component-colors($deeppurple-amber-theme);
+}
+
+.pink-bluegrey-theme {
+    $pink-bluegrey-theme: mat.m2-define-dark-theme(
+        (
+            color: (
+                primary: mat.m2-define-palette(mat.$m2-pink-palette, 700, 500, 900),
+                accent: mat.m2-define-palette(mat.$m2-blue-grey-palette, A200, A100, A400),
+            ),
+        )
+    );
+    @include mat.all-component-colors($pink-bluegrey-theme);
+}
+
+.purple-green-theme {
+    $purple-green-theme: mat.m2-define-dark-theme(
+        (
+            color: (
+                primary: mat.m2-define-palette(mat.$m2-purple-palette, 700, 500, 800),
+                accent: mat.m2-define-palette(mat.$m2-green-palette, A200, A100, A400),
+            ),
+        )
+    );
+    @include mat.all-component-colors($purple-green-theme);
+}
+
+/* You can add global styles to this file, and also import other style files */
+@import './styles/var.scss';
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+    background-color: $kaki;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background-color: #e7e7e7;
+    border: 1px solid #cacaca;
+}
+
+::-webkit-scrollbar {
+    width: 16px;
+}
+
+.card {
+    color: $brown-dark;
+    font-family: $font-itim;
+    background-color: whitesmoke;
+    border: 2px solid $brown-dark;
+    border-radius: 10px;
+    overflow: hidden;
+
+    h2 {
+        margin: 0;
+        padding: 10px;
+        background-color: $kaki;
+        color: white;
+        text-align: center;
+    }
+
+    p {
+        font-size: 20px;
+        color: $brown-dark;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.progress {
+    width: calc(100% - 12px);
+    padding: 6px;
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.25);
+    box-shadow:
+        inset 0 1px 2px rgba(0, 0, 0, 0.25),
+        0 1px rgba(255, 255, 255, 0.08);
+
+    .progress-bar {
+        height: 100%;
+        border-radius: 30px;
+        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
+        transition: 0.4s linear;
+        transition-property: width, background-color;
+        background-color: $green-light;
+    }
+}
+
+.snack-bar {
+    font-family: $font-itim;
+    opacity: 0.8 !important;
+    border-radius: 10px;
+}
+
+.snack-bar-error {
+    --mdc-snackbar-container-color: $red-light !important;
+    background-color: $red-light;
+    border: 2px $red-light solid;
+}
+
+.snack-bar-success {
+    background-color: $green-light;
+    --mdc-snackbar-container-color: $green-light !important;
+    border: 2px $green-light solid;
+}
+
+.snack-bar-warning {
+    --mdc-snackbar-container-color: orange !important;
+    background-color: orange;
+    border: 2px orange solid;
+}
+
+@keyframes bounce {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Common styles */

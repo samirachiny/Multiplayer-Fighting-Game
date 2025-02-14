@@ -1,0 +1,24 @@
+<div id="player-list" class="card">
+    <h2>Listes des joueurs</h2>
+    @if(!isLoading) {
+    <ul>
+        @for (player of players; track $index) {
+        <li [ngClass]="{ 'give-up': player.isGiveUp }">
+            @if(player.isCurrentPlayer){<img class="indicator-current-player" src="assets/img/indicator-current-player.png" alt="" />}
+            <img [src]="player.character.imagePath" alt="logo du joueur" />
+            <p>
+                <span class="player-name">{{ player.name }} @if(playerId && playerId === player.pid){(vous)}</span>
+                <span class="player-wins">Combats gagnés: {{ player.wins }}</span>
+            </p>
+            @if (player.hasFlag) {<img alt="Flag" src="assets/img/items/flag-item.png" />} @if(player.isOrganizer){<img
+                alt="Organisateur"
+                src="assets/img/organizer-marker.png"
+            />} @if(player.isVirtualPlayer && player.virtualPlayerProfile){
+            <mat-icon id="bot-marker" matTooltip="Joueur virtuel"> smart_toy </mat-icon>
+            <img id="bot-profile" [src]="botImages[player.virtualPlayerProfile]" [matTooltip]="player.virtualPlayerProfile" />
+            }
+        </li>
+        }
+    </ul>
+    }
+</div>

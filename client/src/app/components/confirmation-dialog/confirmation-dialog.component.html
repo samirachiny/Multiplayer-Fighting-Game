@@ -1,0 +1,15 @@
+<div class="container">
+    <h1 align="center">{{ data.title }}</h1>
+    <div class="diag-content">
+        <mat-dialog-content>{{ data.body }}</mat-dialog-content>
+        <div></div>
+    </div>
+    <mat-dialog-actions align="center">
+        <button  mat-button mat-dialog-close (click)="onRefused()" class="cancel-btn">
+            <span>Non</span>
+        </button>
+        <button mat-button mat-dialog-close cdkFocusInitial (click)="onAgreed()" class="confirm-btn">
+            <span>Oui</span>
+        </button>
+    </mat-dialog-actions>
+</div>

@@ -1,0 +1,29 @@
+<div id="chronometer">
+    @if(isFighting || this.isChoosingItem){
+    <span>
+        @if (this.isFighting){
+            <p>Combat en cours... {{attacker.name}} affronte {{defender.name}}</p>
+            <span id="fighting-indicator">
+                <img [src]="attacker.character.imagePath" alt="attaquant">
+                <img src="assets/img/versus.png" alt="versus">
+                <img [src]="defender.character.imagePath" alt="defenseur">
+            </span>
+            <span></span>
+        } @else{ 
+        La partie reprendra sous peu. Choix d'item en cours... 
+        }
+    </span>} 
+    @else{
+    <img src="assets/img/chronometer.png" alt="chronomètre" />
+    <div class="progress">
+        <div
+            class="progress-bar"
+            [ngStyle]="{
+                width: 'calc(' + 100 * (remainingTime / 30) + '%)',
+                'background-color': backgroundColor
+            }"
+        ></div>
+    </div>
+    <p>{{ remainingTime }}</p>
+    }
+</div>

@@ -1,0 +1,328 @@
+@import '../../../styles/var.scss';
+
+#fight-view-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20px;
+    width: 100%;
+    height: 100%;
+
+    #fight-view {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        row-gap: 2px;
+        flex-direction: column;
+        width: 85%;
+        height: auto;
+        border-radius: 20px;
+        border: 2px solid $brown-dark;
+        background-color: $brown-light;
+        font-family: $font-itim;
+        overflow: hidden;
+
+        h1 {
+            width: calc(100% - 30px);
+            height: 20px;
+            padding: 15px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $kaki;
+            color: white;
+        }
+
+        #fight-container {
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            column-gap: 10px;
+            padding: 10px;
+            flex: 1;
+            width: calc(100% - 10px);
+
+            .player-stat {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-direction: column;
+                flex: 1;
+
+                .stat {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    column-gap: 10px;
+
+                    img {
+                        width: 20px;
+                        height: 20px;
+                    }
+
+                    .stat-container {
+                        height: 10px;
+                        background-color: white;
+                        border-radius: 10px;
+                        overflow: hidden;
+                        flex: 1;
+
+                        .life {
+                            background-color: $red-light;
+                        }
+
+                        .attack {
+                            background-color: rgb(62, 62, 177);
+                        }
+
+                        .defense {
+                            background-color: $green-light;
+                        }
+
+                        .value-0,
+                        .value-1,
+                        .value-2,
+                        .value-3,
+                        .value-4,
+                        .value-5,
+                        .value-6 {
+                            border-radius: 10px;
+                            width: 100%;
+                            height: 100%;
+                        }
+
+                        .value-0 {
+                            width: 0;
+                        }
+
+                        .value-1 {
+                            width: calc(100% * 1 / 6);
+                        }
+
+                        .value-2 {
+                            width: calc(100% * 2 / 6);
+                        }
+
+                        .value-3 {
+                            width: calc(100% * 3 / 6);
+                        }
+
+                        .value-4 {
+                            width: calc(100% * 4 / 6);
+                        }
+
+                        .value-5 {
+                            width: calc(100% * 5 / 6);
+                        }
+                    }
+                }
+
+                .items {
+                    margin-top: 5px;
+                    width: 100%;
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: start;
+                    column-gap: 5px;
+                    padding-left: 50px;
+
+                    .item {
+                        width: 40px;
+                        height: 40px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 100%;
+                        border: 3px solid $kaki;
+                    }
+                }
+
+                .items:last-of-type {
+                    justify-content: end;
+                    padding-left: 0;
+                    padding-right: 20px;
+                }
+
+                .avatar {
+                    height: 200px;
+                    margin-bottom: 20px;
+                    position: relative;
+                    img {
+                        height: calc(100% - 25px);
+                        width: 100%;
+                        margin-bottom: 5px;
+                    }
+
+                    p {
+                        width: 100%;
+                        text-align: center;
+                        padding: 0;
+                        margin: 0;
+                        height: 20px;
+                        font-size: 20px;
+                    }
+
+                    .damage {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -65%);
+                        color: red;
+                        font-size: 70px;
+                        font-weight: bold;
+                        opacity: 0;
+                        z-index: 100;
+                        animation: damageEffect 1.5s ease forwards;
+                    }
+                }
+
+                .attacker {
+                    transform: scale(1.35);
+                }
+
+                .defender {
+                    transform: scale(1);
+                }
+            }
+
+            #versus {
+                width: 125px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-direction: column;
+
+                p {
+                    font-size: 32px;
+                    height: 50px;
+                    margin: 0;
+                    width: 50px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border: 5px solid $kaki;
+                    border-radius: 100%;
+                    padding: 10px;
+                    color: $brown-dark;
+                }
+
+                img {
+                    height: 125px;
+                    width: 125px;
+                }
+
+                div {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+        }
+
+        .dice-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            column-gap: 10px;
+
+            div {
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+
+                app-dice {
+                    height: 100px;
+                    width: 100px;
+                }
+
+                .dice-hidden {
+                    opacity: 0;
+                    width: 0;
+                    height: 0;
+                }
+            }
+        }
+
+        .result {
+            height: 20px;
+            font-size: 20px;
+        }
+
+        #footer {
+            background-color: $kaki;
+            padding: 20px;
+            width: calc(100% - 40px);
+            p {
+                padding: 0;
+                margin: 0;
+                font-size: 20px;
+                color: white;
+            }
+
+            #btn-group {
+                margin-top: 10px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                column-gap: 5px;
+
+                .btn,
+                .btn-disabled {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    column-gap: 10px;
+                    width: 40%;
+                    border: 3px solid $brown-dark;
+                    border-radius: 10px;
+                    background-color: $green-light;
+                    padding: 5px;
+                    cursor: pointer;
+                    span {
+                        font-family: $font-itim;
+                        color: $brown-dark;
+                        font-size: 22px;
+                    }
+
+                    img {
+                        height: 35px;
+                        width: 35px;
+                    }
+
+                    &:hover {
+                        transform: scale(1.02);
+                        transition: transform ease-in-out 0.3s;
+                    }
+                }
+
+                .btn-disabled {
+                    background: gray;
+                }
+
+                .btn-disabled:hover {
+                    transform: none;
+                }
+            }
+        }
+    }
+}
+
+@keyframes damageEffect {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, -70%) scale(1.5);
+    }
+    100% {
+        transform: translate(-50%, -100%) scale(0.5);
+        opacity: 0;
+    }
+}

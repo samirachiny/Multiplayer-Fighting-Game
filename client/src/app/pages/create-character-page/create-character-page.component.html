@@ -1,0 +1,214 @@
+<div id="create-character-page">
+    <audio autoplay loop>
+        <source src="./assets/audio/create-character.mp3" type="audio/mp3" />
+        Votre navigateur ne supporte pas l'élément audio
+    </audio>
+    <app-header pageTitle="Création de personnage"></app-header>
+    <main id="create-character-container">
+        <div id="back-button">
+            <img src="./assets/img/back-button.png" alt="bouton de retour" (click)="onBack()" />
+        </div>
+        <app-character-list (characterSelected)="onCharacterSelected($event)"></app-character-list>
+        <div id="player-container">
+            <mat-card id="player-avatar-statistic">
+                <mat-card-header>
+                    <h2>{{ characterSelected.name }}</h2>
+                </mat-card-header>
+                <mat-card-content>
+                    <div id="avatar">
+                        <img [src]="characterSelected.imagePath" alt="character-image" class="character-image" />
+                        <input
+                            (keyup.enter)="joinParty()"
+                            type="text"
+                            placeholder="Entrez votre nom"
+                            [(ngModel)]="player.name"
+                            maxlength="20"
+                            (drop)="blockDrop($event)"
+                        />
+                    </div>
+                    <div id="statistic">
+                        <div class="attribute">
+                            <p>
+                                Vie
+                                <mat-icon matTooltip="Nombre de points de vie" matTooltipClass="attribute-description" [matTooltipPosition]="'above'"
+                                    >info</mat-icon
+                                >
+                            </p>
+                            <img src="./assets/img/attributes/life.png" alt="icone de vie" />
+                            <div class="attribute-value">
+                                <div class="stats-value">
+                                    <div class="value-{{ player.life }}"></div>
+                                </div>
+                                <span>{{ player.life }}</span>
+                            </div>
+                        </div>
+                        <div class="attribute">
+                            <p>
+                                Rapidité
+                                <mat-icon
+                                    matTooltip="Determine l'ordre des tours et correspond aussi aux points de mouvement par tour du personnage"
+                                    matTooltipClass="attribute-description"
+                                    [matTooltipPosition]="'above'"
+                                    >info</mat-icon
+                                >
+                            </p>
+                            <img src="./assets/img/attributes/speed.png" alt="icone de rapidité" />
+                            <div class="attribute-value">
+                                <div class="stats-value">
+                                    <div class="value-{{ player.speed }}"></div>
+                                </div>
+                                <span>{{ player.speed }}</span>
+                            </div>
+                        </div>
+                        <div class="attribute">
+                            <p>
+                                Attaque
+                                <mat-icon
+                                    matTooltip="L'attribut d'attaque représente la force avec laquelle une attaque est faite sur l'adversaire"
+                                    matTooltipClass="attribute-description"
+                                    [matTooltipPosition]="'above'"
+                                    >info</mat-icon
+                                >
+                            </p>
+                            <img src="./assets/img/attributes/attack.png" alt="icone de'attaque" />
+                            <div class="attribute-value">
+                                <div class="stats-value">
+                                    <div class="value-{{ player.attack }}"></div>
+                                </div>
+                                <span>{{ player.attack }}</span>
+                                @if (player.diceAssignment['attack'] === d6) {
+                                <span class="plus">+</span>
+                                <img
+                                    matTooltip="Ajoute le nombre sur le dé comme bonus sur l'attaque"
+                                    src="./assets/img/dices/dice-six.png"
+                                    alt="de 6"
+                                    class="dice-add"
+                                />
+                                } @else if (player.diceAssignment['attack'] === d4 ){
+                                <span class="plus">+</span>
+                                <img
+                                    matTooltip="Ajoute le nombre sur le dé comme bonus sur l'attaque"
+                                    src="./assets/img/dices/dice-four.png"
+                                    alt="de 4"
+                                    class="dice-add"
+                                />
+                                }
+                            </div>
+                        </div>
+                        <div class="attribute">
+                            <p>
+                                Defense
+                                <mat-icon
+                                    matTooltip="L'attribut de défense représente la capacité à bloquer l'attaque d'un adversaire"
+                                    matTooltipClass="attribute-description"
+                                    [matTooltipPosition]="'above'"
+                                    >info</mat-icon
+                                >
+                            </p>
+                            <img src="./assets/img/attributes/defense.png" alt="icone de defense" />
+                            <div class="attribute-value">
+                                <div class="stats-value">
+                                    <div class="value-{{ player.defense }}"></div>
+                                </div>
+                                <span>{{ player.defense }}</span>
+                                @if (player.diceAssignment['attack'] === d4) {
+                                <span class="plus">+ </span>
+                                <img
+                                    matTooltip="Ajoute le nombre sur le dé comme bonus sur la defense"
+                                    src="./assets/img/dices/dice-six.png"
+                                    alt="de 6"
+                                    class="dice-add"
+                                />
+                                } @else if (player.diceAssignment['attack'] === d6) {
+                                <span class="plus">+</span>
+                                <img
+                                    matTooltip="Ajoute le nombre sur le dé comme bonus sur la defense"
+                                    src="./assets/img/dices/dice-four.png"
+                                    alt="de 4"
+                                    class="dice-add"
+                                />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+            <mat-card id="player-history">
+                <mat-card-header>
+                    <h2>Personnalisez votre avatar</h2>
+                </mat-card-header>
+                <div class="attribute-modified">
+                    <p class="center">
+                        Bonus
+                        <mat-icon
+                            matTooltip="Bonus sur la rapidité ou sur le nombre de points de vie"
+                            matTooltipClass="attribute-description"
+                            [matTooltipPosition]="'above'"
+                            >info</mat-icon
+                        >
+                    </p>
+                    <mat-button-toggle-group name="vie/rapidité" [hideSingleSelectionIndicator]="true">
+                        <mat-button-toggle (click)="onIncreaseAttribute('life')">
+                            <span [ngStyle]="{ 'font-size': player.life === 6 ? '30px' : '20px' }"> +2 Vie </span>
+                        </mat-button-toggle>
+                        <mat-button-toggle (click)="onIncreaseAttribute('speed')">
+                            <span [ngStyle]="{ 'font-size': player.speed === 6 ? '30px' : '20px' }"> +2 Rapidité </span>
+                        </mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+                <div class="attribute-modified">
+                    <p class="center">
+                        Choix des dés
+                        <mat-icon
+                            matTooltip="Choix du DÉ de bonus a appliquer sur les attributs de defense ou d'attaque"
+                            matTooltipClass="attribute-description"
+                            [matTooltipPosition]="'above'"
+                            >info</mat-icon
+                        >
+                    </p>
+                    <mat-button-toggle-group name="attaque/defense" [hideSingleSelectionIndicator]="true">
+                        <mat-button-toggle (click)="onAssignDice('attack')">
+                            <p>
+                                <span [ngStyle]="{ 'font-size': player.diceAssignment['attack'] === d6 ? '30px' : '20px' }">
+                                    Attaque
+                                    <img
+                                        [ngStyle]="{
+                                            width: player.diceAssignment['attack'] === d6 ? '30px' : '20px',
+                                            height: player.diceAssignment['attack'] === d6 ? '30px' : '20px'
+                                        }"
+                                        [src]="player.diceAssignment['attack'] === d6  || player.diceAssignment['attack'] === null ? './assets/img/dices/dice6.png' : './assets/img/dices/dice4.png'"
+                                        alt="Dé 6"
+                                    />
+                                </span>
+                            </p>
+                        </mat-button-toggle>
+                        <mat-button-toggle (click)="onAssignDice('defense')">
+                            <p>
+                                <span [ngStyle]="{ 'font-size': player.diceAssignment['defense'] === d6 ? '35px' : '20px' }">
+                                    Défense
+                                    <img
+                                        [ngStyle]="{
+                                            width: player.diceAssignment['defense'] === d6 ? '30px' : '20px',
+                                            height: player.diceAssignment['defense'] === d6 ? '30px' : '20px'
+                                        }"
+                                        [src]="player.diceAssignment['defense'] === d6 || player.diceAssignment['defense'] === null ? './assets/img/dices/dice6.png' : './assets/img/dices/dice4.png'"
+                                        alt="Dé 6"
+                                    />
+                                </span>
+                            </p>
+                        </mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+                <mat-card-header>
+                    <h2>Description du personnage</h2>
+                </mat-card-header>
+                <mat-card-content>
+                    <p id="text-history">{{ player.character.story }}</p>
+                </mat-card-content>
+                <mat-card-footer>
+                    <button matRipple [matRippleCentered]="true" id="submit-button" (click)="joinParty()">Continuer</button>
+                </mat-card-footer>
+            </mat-card>
+        </div>
+    </main>
+</div>

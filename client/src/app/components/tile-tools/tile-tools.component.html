@@ -1,0 +1,15 @@
+<h3>Tuiles</h3>
+<div id="tile-container">
+    @for(tile of tiles; let i = $index; track i){
+    <img
+        [ngClass]="selectedIndex === i ? 'tile-image-selected' : 'tile-image'"
+        matTooltipClass="tile-tool-tip"
+        [matTooltip]="tile.description"
+        matTooltipPosition="right"
+        [src]="tile.image"
+        alt="Tile image"
+        (click)="onSelectedTile(i)"
+        (dragstart)="onDragStart($event)"
+    />
+    }
+</div>

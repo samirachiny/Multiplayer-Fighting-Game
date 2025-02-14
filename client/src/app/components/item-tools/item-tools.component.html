@@ -1,0 +1,19 @@
+<h3>Objects</h3>
+<div id="item-container">
+    @for(item of itemMap; let i = $index; track i){
+    <div
+        [ngClass]="item[1] === 0 ? 'item-disabled' : 'item'"
+        matTooltipClass="tile-tool-tip"
+        matTooltipPosition="above"
+        [matTooltip]="item[0].description"
+        [draggable]="item[1] !== 0"
+        (dragstart)="onDragStart($event, item[0], item[1])"
+        (dragend)="onDragEnd()"
+    >
+        @if( item[1] > 1){
+        <p>{{ item[1] }}</p>
+        }
+        <img [src]="item[0].image" alt="Tile image" />
+    </div>
+    }
+</div>

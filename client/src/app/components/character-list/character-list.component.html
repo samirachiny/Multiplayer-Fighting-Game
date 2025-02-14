@@ -1,0 +1,17 @@
+<div id="carousel">
+    <button matRipple [matRippleCentered]="true" class="carousel-button" matRipple
+     [matRippleCentered]="true" (click)="nextCharacter(true)">
+        <mat-icon>chevron_left</mat-icon>
+    </button>
+    <div id="carousel-inner">
+        @for (character of charactersToDisplay; let index = $index; track index){
+        <div class="card-character" (click)="onCharacterClick(index)">
+            <img [src]="character.imagePath" alt="character" class="available-{{ !charactersOccupied.includes(character.id - 1) }}" />
+        </div>
+        }
+    </div>
+    <button matRipple [matRippleCentered]="true" class="carousel-button" matRipple
+     [matRippleCentered]="true" (click)="nextCharacter()">
+        <mat-icon>chevron_right</mat-icon>
+    </button>
+</div>

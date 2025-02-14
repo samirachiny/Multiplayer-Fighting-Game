@@ -1,0 +1,25 @@
+<div id="main-container">
+    <audio autoplay loop>
+        <source src="./assets/audio/Vue-initiale-admin.mp3" type="audio/mp3" />
+        Votre navigateur ne supporte pas l'élément audio
+    </audio>
+    <app-header pageTitle="Création de partie"></app-header>
+    <main id="loading-{{ this.isLoading }}">
+        @if (!this.isLoading) {
+        <div id="game-list-box">
+            @for(game of visibleGames;track game.gid){
+            <app-game-card class="game-card" [game]="game" [isEditable]="false" (selectGame)="handleSelectionGame($event)"> </app-game-card>
+            }
+            @empty {
+                <div class="empty">
+                    <p>
+                        Aucun jeu disponible 🛡️😔⚔️
+                    </p>
+                </div>
+            }
+        </div>
+        } @else {
+        <mat-spinner></mat-spinner>
+        }
+    </main>
+</div>

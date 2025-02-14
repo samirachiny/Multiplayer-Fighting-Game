@@ -1,0 +1,294 @@
+@import '../../../styles/var.scss';
+
+#create-character-page {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+#create-character-container {
+    $background-image: '../../../assets/img/backgrounds/create-character-background.png';
+    background: url($background-image) lightgray 50% / cover no-repeat;
+    flex: 1;
+
+    #back-button {
+        position: relative;
+        img {
+            cursor: pointer;
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            &:hover{
+                transform: scale(1.1);
+            }
+        };
+    }
+}
+
+#player-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    column-gap: 10px;
+    flex: 1;
+
+    mat-card{
+        border-radius: 10px;
+        border: 2px solid $brown-dark;
+        background-color: $gray-transparent-2;
+        font-family: $font-itim;
+        color: $brown-dark;
+        padding: 10px;
+
+        mat-card-header{
+            background-color: $kaki;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+
+            h2{
+                padding: 0;
+                margin: 0;
+            }
+        }
+    }
+
+    #player-avatar-statistic{
+        width: 50%;
+        mat-card-content{
+            margin-top: 10px;
+            display: flex;
+            align-items: stretch;
+            justify-content: space-between;
+            row-gap: 20px;
+
+            #avatar{
+                width: 35%;
+                border-radius: 10px;
+                img{
+                    border-radius: 10px;
+                    border: 5px solid $brown-dark;
+                    width: 100%;
+                    height: 85%;
+                }
+
+                input {
+                    width: 98%;
+                    padding: 2%;
+                    font-size: 20px;
+                    background-color: $brown-light;
+                    border: 3px solid $brown-dark;
+                    border-radius: 5px;
+                    font-family: $font-itim;
+                }
+
+                input:focus {
+                    outline: none;
+                    box-shadow: none;
+                }
+            }
+
+            #statistic{
+                background-color: $kaki;
+                border-radius: 10px;
+                width: 60%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: wrap;
+                row-gap: 10px;
+
+                p {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    column-gap: 5px;
+                    margin: 0;
+                    padding: 0;
+                    font-size: 20px;
+                    font-weight: 800;
+                }
+
+                .attribute{
+                    width: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    row-gap: 5px;
+
+                    img{
+                        width: 60px;
+                        height: 60px;
+                        cursor: pointer;
+                        animation: bounce 2s infinite;
+                    }
+
+                    .attribute-value{
+                        width: 60%;
+                        display: flex;
+                        justify-content: start;
+                        align-items: center;
+                        column-gap: 5px;
+                        padding: 10px;
+
+                        img.dice-add {
+                            width: 25px;
+                            height: 25px;
+                        }
+
+                        span.plus {
+                            padding-bottom: 4px;
+                        }
+
+                        .stats-value {
+                            width: 100%;
+                            border-radius: 10px;
+                            background-color: $brown-light;
+                            overflow: hidden;
+                    
+                            .value-4 {
+                                border: 5px solid $brown-dark;
+                                border-radius: 10px;
+                                width: calc((4 / 6)*100%);
+                            }
+                    
+                            .value-6 {
+                                border: 5px solid $brown-dark;
+                                border-radius: 10px;
+                                width: 100%;
+                            }
+                        }
+
+                        img{
+                            width: 30px;
+                            height: 30px;
+                            animation: none;
+                            transition: transform 0.3s ease-in-out;
+                        }
+
+                        img:hover{
+                            transform: scale(1.1);
+                        }
+                    }
+
+                    span{
+                        font-size: 25px;
+                    }
+                }
+            }
+        }
+    }
+
+    #player-history{
+        width: 40%;
+
+        .attribute-modified{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            column-gap: 10px;
+            margin: 15px 0px;
+
+            p{
+                flex: 1;
+                margin: 0;
+                padding: 0;
+                font-size: 20px;
+                font-weight: 800;
+            }
+
+            p.center {
+                display: flex;
+                align-items: center;
+                
+                mat-icon {
+                    padding-left: 3px;
+                }
+            }
+
+            mat-button-toggle-group {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex: 3;
+                column-gap: 2px;
+
+                mat-button-toggle {
+                    flex: 1;
+                    display: flex;
+                    background-color: white;
+                    font-size: 20px;
+                    font-weight: 800;
+                    img {
+                        width: 20px;
+                        height: 20px;
+                        border: none;
+                    }
+
+                    p {
+                        margin: 0;
+                        padding: 0;
+
+                        span {
+                            margin: 0;
+                            padding: 0;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            img {
+                                padding: 5px;
+                            }
+                        }
+                    }
+                }
+
+                .mat-button-toggle-button[aria-checked="true"] {
+                    background-color: $kaki;
+                    color: white;
+                }
+            }
+        }
+
+        mat-card-content{
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: start;
+            p{
+                padding: 0;
+                margin: 0;
+                margin-top: 20px;
+                font-size: 20px;
+                text-align: justify;
+            }
+        }
+
+        mat-card-footer{
+            #submit-button {
+                cursor: pointer;
+                width: 100%;
+                padding: 5px;
+                font-size: 20px;
+                background-color: $green-light;
+                border: 3px solid $brown-dark;
+                border-radius: 5px;
+                font-family: $font-itim;
+                transition: transform 0.3s ease-in-out;
+
+                &:hover{
+                    transform: scale(1.01);
+                }
+            }
+        }
+    }
+    
+}
+
+

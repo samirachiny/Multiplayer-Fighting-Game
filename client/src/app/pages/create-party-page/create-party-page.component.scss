@@ -1,0 +1,61 @@
+@import '../../../styles/var.scss';
+
+#main-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    font-family: $font-itim;
+    height: 100%;
+}
+
+main {
+    width: 100%;
+    $background-create-party: '../../../assets/img/backgrounds/background3.png';
+    flex: 1;
+    background: url($background-create-party) lightgray 50% / cover no-repeat;
+    position: relative;
+}
+
+#loading-true {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#loading-false {
+    position: relative;
+
+    
+}
+
+
+#game-list-box {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+   
+    .game-card {
+        width: 20%;
+        cursor: pointer;
+    }
+
+    .empty {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+
+        p {
+            background-color: rgba(255, 255, 255, 0.3);
+            padding: 50px;
+            border-radius: 8px;
+        }
+    }
+}
+

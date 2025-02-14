@@ -1,0 +1,35 @@
+<div id="edit-container">
+    <div>
+        <button matRipple [matRippleCentered]="true" class="btn" (click)="onResetMap()">Réintialiser</button>
+        <app-item-tools></app-item-tools>
+    </div>
+    <div id="map-container">
+        <canvas
+            #map
+            [height]="gameMapEditor.height"
+            [width]="gameMapEditor.width"
+            (mousedown)="onMouseDown($event)"
+            (mousemove)="onMouseMove($event)"
+            (mouseup)="onMouseUp($event)"
+            (contextmenu)="disabledContextMenu($event)"
+        >
+        </canvas>
+        <div
+            #draggedDiv
+            id="dragged-item"
+            (dragstart)="onDragStart($event)"
+            draggable="true"
+            [ngStyle]="{
+                display: isShowDraggableDiv ? 'block' : 'none',
+                'width.px': gameMapEditor.tileSize,
+                'height.px': gameMapEditor.tileSize,
+                'top.px': topPositionDiv,
+                'left.px': leftPositionDiv
+            }"
+        >
+            <img #draggedImg [src]="itemImage" alt="Item image" />
+        </div>
+    </div>
+
+    <app-tile-tools (tileClicked)="onSelectedTile($event)"></app-tile-tools>
+</div>

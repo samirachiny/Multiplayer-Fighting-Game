@@ -1,0 +1,37 @@
+<div id="home-page">
+    <audio autoplay loop>
+        <source src="./assets/audio/Vue-initiale-admin.mp3" type="audio/mp3" />
+        Votre navigateur ne supporte pas l'élément audio
+    </audio>
+
+    <header>
+        <h1 id="game-title">{{ title }}</h1>
+        <p>Plonge dans l'aventure, façonne ton destin.</p>
+        <p></p>
+    </header>
+    <main id="home-container">
+        <div id="logo">
+            <img src="./assets/img/logo.png" alt="Logo du jeu" />
+        </div>
+        <div id="group-home-btn">
+            <a class="home-btn" matRipple [matRippleCentered]="true"  routerLink="/join-party">
+                <p>Rejoindre partie</p>
+                <img src="./assets/img/icon-join-part.png" alt="Rejoindre partie" />
+            </a>
+            <a class="home-btn" matRipple [matRippleCentered]="true"   routerLink="/create-party">
+                <p>Créer partie</p>
+                <img src="./assets/img/icon-create-part.png" alt="Créer partie" />
+            </a>
+            <a class="home-btn" matRipple [matRippleCentered]="true"  routerLink="/admin">
+                <p>Administrer jeux</p>
+                <img src="./assets/img/icon-admin-game.png" alt="Administrer jeux" />
+            </a>
+        </div>
+    </main>
+    <footer>
+        <p>
+            {{ members.join(' - ') }}
+        </p>
+        <p>Équipe-203</p>
+    </footer>
+</div>

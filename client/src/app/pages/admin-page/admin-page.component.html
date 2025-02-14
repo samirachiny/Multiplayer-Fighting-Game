@@ -1,0 +1,28 @@
+<div id="admin-page">
+    <audio autoplay loop>
+        <source src="./assets/audio/Vue-initiale-admin.mp3" type="audio/mp3" />
+        Votre navigateur ne supporte pas l'élément audio
+    </audio>
+
+    <app-header pageTitle="Administration de jeux"></app-header>
+    <main id="loading-{{ this.isLoading }}">
+        @if(!this.isLoading) {
+        <div id="game-list-box">
+            <app-create-game class="add-card"></app-create-game>
+            @for (game of games; let index = $index ; track index) {
+            <app-game-card class="game-card" [game]="game" [isEditable]="true" (deleteGame)="handleDeleteGame($event)" (hideGame)="handleHideGame($event)">
+            </app-game-card>
+            }@empty {
+                <div class="empty">
+                    <p>
+                        Aucun jeu disponible,  Veuillez ajouter un jeu 🛡️😔⚔️
+                    </p>
+                </div>
+            }
+        </div>
+        } @else {
+        <mat-spinner></mat-spinner>
+        }
+    </main>
+    <app-import-game></app-import-game>
+</div>

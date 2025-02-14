@@ -1,0 +1,22 @@
+{
+    "folders": [
+        {
+            "path": "."
+        },
+        {
+            "path": "./client"
+        },
+        {
+            "path": "./server"
+        },
+        {
+            "path": "./common"
+        }
+    ],
+    "settings": {
+        "notebook.defaultFormatter": "esbenp.prettier-vscode",
+        "notebook.formatOnCellExecution": true,
+        "notebook.formatOnSave.enabled": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}

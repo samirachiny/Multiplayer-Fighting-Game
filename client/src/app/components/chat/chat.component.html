@@ -1,0 +1,33 @@
+<div class="chat-container">
+    @if(playerInfo){
+    <div id="header">
+        @if (showImage) {
+        <img [src]="playerInfo.character.imagePath" alt="Image  du personnage du joueur"  />
+        <h1>{{ playerInfo.name }}</h1>
+        }
+        @else {
+        <h5>{{ playerInfo.name }}</h5>
+    }
+    </div>
+    <div #messagesContainer id="message-container">
+        @for(message of messages; let index = $index ; track index ) {
+        <div class="message-{{ message.senderId === playerInfo.pid }}">
+            <span class="sender-info">
+                <p id="sender-name">
+                    <img [src]="message.characterImage" class="character-image" alt="Image  du personnage du joueur" />
+                    @if (message.senderId === playerInfo.pid ){ Vous } @else{ {{ message.senderName }} }
+                </p>
+                <p>[{{ message.timestamp | date: 'dd/MM/yyyy' }} -- {{ message.timestamp | date: 'HH:mm:ss' }}]</p>
+            </span>
+            <p class="message-body">{{ message.message }}</p>
+        </div>
+        } @empty {
+        <p id="no-message-info">Aucun message pour le moment</p>
+        }
+    </div>
+    <div id="message-input">
+        <input [(ngModel)]="newMessage" maxlength="200" (keyup.enter)="sendMessage()" placeholder="Tapez un message..." appStopDKey />
+        <button matRipple [matRippleCentered]="true" (click)="sendMessage()"><mat-icon>send</mat-icon></button>
+    </div>
+    }
+</div>

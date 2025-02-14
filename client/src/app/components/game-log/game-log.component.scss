@@ -1,0 +1,106 @@
+@import "../../../styles/var.scss";
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.journal-container {
+    display: flex;
+    flex-direction: column;
+    background-color: $brown-light;
+    flex-direction: column;
+    border-radius: 20px;
+    border: 2px solid $brown-dark;
+    font-family: $font-itim;
+    overflow: hidden;
+    height: 100%;
+
+    .filter-header {
+        background-color: $kaki;
+        font-size: 16px;
+        padding: 5px 5px;
+        font-family: $font-itim;
+        color: white;
+        border: 1px solid $brown-dark;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    
+        .filter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            column-gap:  10px;
+    
+            img {
+                padding: 0;
+                width: 30px;
+                height: 30px;
+                transform: rotate(90deg);
+            }
+        }
+    
+        .filter-options {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            column-gap: 5px;
+            
+            input {
+                width: 20px;
+                height: 20px;
+            }
+    
+            label {
+                margin-right: 5px;
+            }
+        }
+    }
+
+    .logs-container {
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        
+        .log {
+            border: 1px solid $kaki;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            column-gap: 10px;
+        
+            .log-icon {
+                width: 30px;
+                height: 30px;
+                border-right: 1px solid $brown-dark;
+                padding-right: 5px;
+                padding-left: 5px;
+            }
+        
+            .log-body {
+                display: flex;
+                align-items: center;
+                font-family: $font-itim;
+                font-size: 15px;
+                column-gap: 10px;
+                padding-top: 3px;
+                padding-bottom: 3px;
+
+                p{
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+                }
+
+                .log-time {
+                    height: 40px;
+                    line-height: 40px;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,73 @@
+@import "../../../styles/var.scss";
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    border: 3px solid $brown-dark;
+}
+
+h1 {
+    background-color: $kaki;
+    color: #fff;
+    font-family: $font-itim;
+    font-size: 1.5rem;
+    height: 3.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    padding: 0px 5px;
+}
+
+div {
+    background-color: $brown-light;
+}
+
+.cancel-btn {
+    background-color: $red-light;
+    border: 3px solid $brown-dark;
+    width: 8rem;
+    font-family: $font-itim;
+    font-size: 1.2rem;
+    margin-right: 3rem;
+    margin-bottom: 2rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+.confirm-btn {
+    background-color: $green-light;
+    border: 3px solid $brown-dark;
+    width: 8rem;
+    font-family: $font-itim;
+    font-size: 1.2rem;
+    margin-left: 3rem;
+    margin-bottom: 2rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+.cancel-btn:hover,
+.confirm-btn:hover {
+    transform: scale(1.05);
+}
+
+.cancel-btn span,
+.confirm-btn span {
+    color: #fff;
+}
+
+.diag-content {
+    font-family: $font-itim;
+    font-size: 1.2rem;
+    padding: 10px;
+
+    div {
+        border: 3px solid $kaki;
+        text-align: center;
+        width: 20rem;
+        margin: 0 auto;
+        margin-bottom: 10px;
+    }
+}

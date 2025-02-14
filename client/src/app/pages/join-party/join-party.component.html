@@ -1,0 +1,28 @@
+<div id="join-party-page">
+    <app-header pageTitle="Joindre une partie"></app-header>
+    <main>
+        <img src="assets/img/icon-join-part.png" alt="joindre partie">
+        <form (ngSubmit)="onSubmit()" #accessForm="ngForm">
+            <label>Code de la partie</label>
+            <input 
+                type="text" 
+                [(ngModel)]="accessCode" 
+                #accessCodeInput="ngModel" 
+                maxlength="4" required pattern="^[0-9]{4}$"
+                placeholder="Entrez le code de la partie svp" 
+                name="accessCode"
+            />
+            <button matRipple [matRippleCentered]="true" type="submit" [ngClass]="{'btn-disabled': !accessForm.form.valid}" [disabled]="!accessForm.form.valid">Rejoindre</button>
+            @if(accessCodeInput.invalid && (accessCodeInput.dirty || accessCodeInput.touched)){
+                <div id="form-error">
+                    @if(accessCodeInput.errors?.required) {
+                    <p>Le code d'accès est requis.</p>
+                    } @if(accessCodeInput.errors?.pattern) {
+                    <p>Le code d'accès doit être composé de 4 chiffres.</p>
+                    }
+                </div>
+            }
+        </form>
+    </main>
+    
+</div>

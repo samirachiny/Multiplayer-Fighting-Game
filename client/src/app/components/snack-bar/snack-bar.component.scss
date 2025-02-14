@@ -1,0 +1,18 @@
+@import '../../../styles/var.scss';
+
+.my-snack-bar {
+    width: 100%;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    border-radius: 5px;
+
+    mat-icon {
+        height: 32px;
+        width: 32px;
+        font-size: 32px;
+        color: white;
+    }
+}

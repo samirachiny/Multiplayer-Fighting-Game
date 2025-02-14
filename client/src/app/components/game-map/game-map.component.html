@@ -1,0 +1,47 @@
+<div id="game-map-container">
+    <canvas
+        #map
+        [height]="600"
+        [width]="600"
+        (mousemove)="onMouseMove($event)"
+        (mousedown)="onMouseDown($event)"
+        (contextmenu)="disabledContextMenu($event)"
+    >
+    </canvas>
+    <div
+        (contextmenu)="disabledContextMenu($event)"
+        id="info"
+        [ngStyle]="{
+            display: isShowInfo ? 'block' : 'none',
+            'top.px': topPositionDiv,
+            'left.px': leftPositionDiv + 40
+        }"
+    >
+        <h2>Infos</h2>
+        <div id="info-container">
+            @if(tileInfo){
+            <p>{{ tileInfo.description }}</p>
+            @if(tileInfo.item){
+            <p>{{ tileInfo.item.description }}</p>
+            } }@else if(playerInfo) {
+            <div>
+                <img id="avatar" [src]="playerInfo.character.imagePath" alt="avatar du personnage" />
+                <ul>
+                    <li>
+                        <img src="assets/img/attributes/life.png" alt="Vie" /><span class="stat">{{ playerInfo.life }}</span>
+                    </li>
+                    <li>
+                        <img src="assets/img/attributes/speed.png" alt="Rapidité" /><span class="stat">{{ playerInfo.speed }}</span>
+                    </li>
+                    <li>
+                        <img src="assets/img/attributes/attack.png" alt="Attaque" /><span class="stat">{{ playerInfo.attack }}</span>
+                    </li>
+                    <li>
+                        <img src="assets/img/attributes/defense.png" alt="Defense" /><span class="stat">{{ playerInfo.defense }}</span>
+                    </li>
+                </ul>
+            </div>
+            }
+        </div>
+    </div>
+</div>

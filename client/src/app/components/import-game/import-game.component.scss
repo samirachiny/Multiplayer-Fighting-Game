@@ -1,0 +1,187 @@
+@import '../../../styles/var.scss';
+
+#import-btn {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    bottom: 10px;
+    right: 10px;
+    justify-content: center;
+    background-color: $green-light;
+    border-radius: 100%;
+    padding: 20px;
+    z-index: 100;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.05);
+        transition: transform ease-in-out 0.3s;
+    }
+
+    mat-icon {
+        display: flex;
+        font-size: 30px;
+        color: $brown-dark;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.mat-mdc-dialog-surface {
+    background-color: transparent !important;
+}
+
+#dialog-container {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    column-gap: 10px;
+    border: 1px solid $brown-dark;
+
+    #form-info-container,
+    #map-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        row-gap: 10px;
+        font-family: $font-itim;
+        width: 500px;
+        background-color: white;
+
+        h2 {
+            padding: 10px;
+            margin: 0;
+            background-color: $kaki;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: calc(100% - 20px);
+            color: white;
+        }
+
+        form {
+            padding: 10px;
+            width: calc(100% - 20px);
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            column-gap: 10px;
+
+            input {
+                font-family: $font-itim;
+                border: 2px solid $brown-dark;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &::file-selector-button {
+                    cursor: pointer;
+                    background-color: $brown-light;
+                    color: $brown-dark;
+                    height: 100%;
+                    font-family: $font-itim;
+                    font-size: 20px;
+                    border: 2px solid $brown-dark;
+                    margin: 0;
+                    padding: 5px;
+                    border-radius: 10px 0px 0px 10px;
+                }
+            }
+
+            button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 3px solid $brown-dark;
+                border-radius: 10px;
+                background-color: $green-light;
+                font-family: $font-itim;
+                font-size: 20px;
+                color: $brown-dark;
+                padding: 5px 10px;
+                cursor: pointer;
+
+                &:hover {
+                    transform: scale(1.02);
+                    transition: transform ease-in-out 0.3s;
+                }
+            }
+
+            .btn-disabled {
+                background: gray;
+            }
+
+            .btn-disabled:hover {
+                transform: none;
+            }
+        }
+
+        h3 {
+            padding: 10px;
+            margin: 0;
+            background-color: $kaki;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80%;
+            color: white;
+            border-top: 5px solid $brown-dark;
+        }
+
+        #info-container {
+            width: 80%;
+            height: 243px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            row-gap: 5px;
+            border-radius: 5px;
+            padding: 10px;
+            overflow: hidden;
+
+            .info {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                padding: 7px;
+                column-gap: 15px;
+                border-bottom: 2px solid $brown-dark;
+
+                input {
+                    border-radius: 5px;
+                    height: 25px;
+                    font-size: 20px;
+                    font-family: $font-itim;
+                }
+
+                p {
+                    display: flex;
+                    align-items: center;
+                    padding: 0;
+                    margin: 0;
+                    width: 40%;
+                    font-size: 20px;
+                    overflow-wrap: break-word;
+                }
+
+                p:last-child,
+                input {
+                    width: 60%;
+                }
+            }
+        }
+    }
+
+    #map-container {
+        width: 400px;
+        row-gap: 0px;
+        justify-content: start;
+    }
+}
+
+.cdk-overlay-dark-backdrop {
+    background: rgba(0, 0, 0, 0.6);
+}

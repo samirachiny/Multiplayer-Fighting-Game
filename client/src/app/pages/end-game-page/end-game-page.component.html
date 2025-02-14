@@ -1,0 +1,49 @@
+<div id="end-game-page">
+    <audio autoplay loop>
+        <source src="./assets/audio/create-character.mp3" type="audio/mp3" />
+        Votre navigateur ne supporte pas l'élément audio
+    </audio>
+    <app-header pageTitle="Fin de partie"></app-header>
+    @if(!isDataLoaded && partyStatistic){
+    <main id="end-game-container">
+        <div id="party-stats">
+            <section id="party-summary">
+                <div id="global-statistics">
+                    <h2>Statistiques Globales</h2>
+                    <table>
+                        <tr>
+                            <td>Durée Totale:</td>
+                            <td>{{ partyStatistic.totalDuration }}</td>
+                        </tr>
+                        <tr>
+                            <td>Nombre Total de Tours :</td>
+                            <td>{{ partyStatistic.totalRounds }}</td>
+                        </tr>
+                        <tr>
+                            <td>Pourcentage de Tuiles Visitées :</td>
+                            <td>{{ partyStatistic.visitedTilesPercentage | number: '1.2-2' }}%</td>
+                        </tr>
+                        <tr>
+                            <td>Pourcentage de Portes Manipulées :</td>
+                            <td>{{ partyStatistic.manipulatedDoorsPercentage | number: '1.2-2' }}%</td>
+                        </tr>
+                        @if(partyStatistic.flagHoldersCount){
+                        <tr>
+                            <td>Nombre de Détenteurs du Drapeau :</td>
+                            <td>{{ partyStatistic.flagHoldersCount }}</td>
+                        </tr>
+                        }
+                        <tr>
+                            <td>Vainqueur de la partie :</td>
+                            <td>{{ partyStatistic.winner }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+            <app-player-statistic [displayablePlayerStatistics]="partyStatistic.displayPlayerStatistics"></app-player-statistic>
+            <button matRipple [matRippleCentered]="true" (click)="navigateToHome()">Retour page d'acceuil</button>
+        </div>
+        <app-chat [showImage]="true" id="chat"></app-chat>
+    </main>
+    }
+</div>

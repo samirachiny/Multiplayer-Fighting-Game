@@ -1,0 +1,134 @@
+<div id="waiting-page">
+    <audio autoplay loop>
+        <source src="./assets/audio/create-character.mp3" type="audio/mp3" />
+        Votre navigateur ne supporte pas l'élément audio
+    </audio>
+    <app-header pageTitle="Salle d'attente"></app-header>
+    <main>
+        <div id="waiting-container-{{ isOrganizer }}">
+            <div id="waiting-player-list">
+                <p id="waiting-player-list-title">Joueurs <mat-icon>groups</mat-icon></p>
+                <ul>
+                    @for (p of this.players; track p.pid){
+                    <li class="waiting-player-list-item" id="player-{{ p.pid === this.player.pid }}">
+                        <span>
+                            <img [src]="p.character.imagePath" alt="character-image" />
+                            <p>{{ p.name }}</p>
+                        </span>
+                        @if(p.isVirtualPlayer && p.virtualPlayerProfile){
+                        <mat-icon id="bot-marker" matTooltip="Joueur virtuel" matListItemIcon> smart_toy </mat-icon>
+                        <img id="bot-profile" [src]="botImages[p.virtualPlayerProfile]" [matTooltip]="p.virtualPlayerProfile" />
+                        } @if (p.isOrganizer){
+                        <img title="Organisateur" id="organizer-marker" src="assets/img/organizer-marker.png" matTooltip="Organisateur" />
+                        } @if (isOrganizer && !p.isOrganizer){
+                        <mat-icon id="eject-btn" matTooltip="Exclure" (click)="onEjectPlayer(p.pid)" matListItemIcon> do_not_disturb_on </mat-icon>
+                        } @if(p.pid === player.pid){
+                        <mat-icon id="leave-btn" matTooltip="Quitter" (click)="onLeaveParty()">exit_to_app</mat-icon>
+                        }
+                    </li>
+                    }
+                </ul>
+                <div id="progress-bar" matTooltip="{{ maxPlayers - playersNumber }} places restantes">
+                    <p>Nombre de Joueurs ({{ playersNumber }} / {{ maxPlayers }})</p>
+                    <div class="progress">
+                        <div class="progress-bar" [ngStyle]="{ width: 'calc(' + 100 * (playersNumber / maxPlayers) + '%)' }"></div>
+                    </div>
+                </div>
+            </div>
+            @if (isOrganizer){
+            <div id="party-info">
+                <div id="room">
+                    <p id="room-access-code" [cdkCopyToClipboard]="accessCode.toString()" matRipple>
+                        Code : {{ accessCode }} <mat-icon>content_copy</mat-icon>
+                    </p>
+                    <div id="info-container">
+                        <div>
+                            <span>
+                                En mode CTF, recuperer le drapeau et mettez vous sur votre point de depart pour gagner la partie
+                            </span>
+                            <span>
+                                En mode Classique ou CTF, combattez les autres joueurs remporter trois combats et vous gagnerez la partie
+                            </span>
+                            <span>
+                                Certains objets ramassés dans la carte vous confèrent des avantages au combat ou durant la partie
+                            </span>
+                        </div>
+                    </div>
+                    <div id="btn-group">
+                        <button
+                            matRipple
+                            [matRippleCentered]="true"
+                            [ngClass]="players.length === maxPlayers ? 'btn-disabled' : 'btn'"
+                            (click)="onToggleLockParty()"
+                            [disabled]="players.length === maxPlayers"
+                        >
+                            <p>@if(this.isLocked){Débloquer}@else{Bloquer} partie</p>
+                            <mat-icon>@if(this.isLocked){lock}@else{lock_open}</mat-icon>
+                        </button>
+                        <button
+                            matRipple
+                            [matRippleCentered]="true"
+                            [ngClass]="players.length === maxPlayers ? 'btn-disabled' : 'btn'"
+                            [disabled]="players.length === maxPlayers"
+                            (click)="openChoiceBotProfile()"
+                        >
+                            <p>Ajouter joueur virtuel</p>
+                            <mat-icon id="add-virtual-btn">smart_toy</mat-icon>
+                        </button>
+                        <button
+                            matRipple
+                            [matRippleCentered]="true"
+                            [ngClass]="playersNumber < 2 || !isLocked ? 'btn-disabled' : 'btn'"
+                            [disabled]="playersNumber < 2 || !isLocked"
+                            (click)="onStartGame()"
+                        >
+                            <p>Commencer la partie</p>
+                            <mat-icon id="add-virtual-btn">sports_esports</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <div id="game-info">
+                    <p>Informations du jeu</p>
+                    <ul>
+                        <li><mat-icon>sports_esports</mat-icon> Nom du jeu: {{ game.name }}</li>
+                        <li><mat-icon>gamepad</mat-icon> Mode du jeu: {{ game.mode }}</li>
+                        <li><mat-icon>map</mat-icon> Taille de la carte: {{ game.mapSize }} x {{ game.mapSize }}</li>
+                        <li>
+                            <mat-icon>calendar_month</mat-icon>Date de création: <span>{{ game.creationDate | date: 'dd/MM/yyyy' }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            }
+        </div>
+        <div id="chat-container">
+            @if(!isOrganizer && game){
+            <div id="game-info">
+                <p>Informations du jeu</p>
+                <ul>
+                    <li><mat-icon>sports_esports</mat-icon> Nom du jeu: {{ game.name }}</li>
+                    <li><mat-icon>gamepad</mat-icon> Mode du jeu: {{ game.mode }}</li>
+                    <li><mat-icon>map</mat-icon> Taille de la carte: {{ game.mapSize }} x {{ game.mapSize }}</li>
+                    <li>
+                        <mat-icon>calendar_month</mat-icon>Date de création: <span>{{ game.creationDate | date: 'dd/MM/yyyy' }}</span>
+                    </li>
+                </ul>
+                <div id="info-container">
+                    <div>
+                        <span>
+                            En mode CTF, recuperer le drapeau et mettez vous sur votre point de depart pour gagner la partie
+                        </span>
+                        <span>
+                            En mode Classique ou CTF, combattez les autres joueurs remporter trois combats et vous gagnerez la partie
+                        </span>
+                        <span>
+                            Certains objets ramassés dans la carte vous confèrent des avantages au combat ou durant la partie
+                        </span>
+                    </div>
+                </div>
+            </div>
+            }
+            <app-chat [ngStyle]="{ 'max-height': isOrganizer ? '100%' : 'calc(100% - 275px)' }" [showImage]="true"></app-chat>
+        </div>
+    </main>
+</div>

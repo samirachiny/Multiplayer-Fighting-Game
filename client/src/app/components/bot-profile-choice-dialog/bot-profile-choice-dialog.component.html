@@ -1,0 +1,18 @@
+<div id="choose-bot-profile-container">
+    <h2>Selectionner le profil du robot à ajouter</h2>
+    <div id="profile-container">
+        @for (profile of profiles; track $index) {
+        <div
+            class="profile"
+            [ngClass]="{ 'profile-selected': virtualPlayerProfile === profile.botProfile }"
+            (click)="onSelectedProfile(profile)"
+            matTooltipClass="tile-tool-tip"
+            matTooltipPosition="above"
+            [matTooltip]="profile.description"
+        >
+            <img [src]="profile.image" alt="profile.description" />
+        </div>
+        }
+    </div>
+    <button mat-button mat-dialog-close (click)="onChoiceDone()">Terminer</button>
+</div>

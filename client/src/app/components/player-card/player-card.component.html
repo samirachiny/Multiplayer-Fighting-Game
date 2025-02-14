@@ -1,0 +1,44 @@
+<div id="player-statistics-container">
+    <div id="player-statistics" class="card">
+        @if(isPlayerInitialized){
+        <h2>{{ player.name }}</h2>
+        <div id="avatar">
+            <img [src]="player.character.imagePath" alt="avatar" />
+            <ul>
+                <li>
+                    <img src="assets/img/attributes/life.png" alt="Vie" /><span class="stat"><div [class]="'value-' + player.life"></div></span
+                    >{{ player.life }}
+                </li>
+                <li>
+                    <img src="assets/img/attributes/speed.png" alt="Rapidité" /><span class="stat"><div [class]="'value-' + player.speed"></div></span
+                    >{{ player.speed }}
+                </li>
+                <li>
+                    <img src="assets/img/attributes/attack.png" alt="Attaque" /><span class="stat"
+                        ><div [class]="'value-' + player.attack"></div></span
+                    >{{ player.attack }}
+                </li>
+                <li>
+                    <img src="assets/img/attributes/defense.png" alt="Defense" /><span class="stat"
+                        ><div [class]="'value-' + player.defense"></div></span
+                    >{{ player.defense }}
+                </li>
+            </ul>
+        </div>
+        <div id="attribute-inventory">
+            <ul>
+                <li>Attaque: {{ player.diceAssignment.attack }} / Défense: {{ player.diceAssignment.defense }}</li>
+                <li>Nombre points mouvements: {{ player.availableMoves }}</li>
+                <li>Nombre actions restantes: {{ player.remainingAction }}</li>
+            </ul>
+            <div class="center">
+                <p>Inventaire</p>
+                <div id="inventory-container">
+                    <div class="inventory-box">@if (items[0]){ <img [src]="items[0].image" alt="item" [matTooltip]="items[0].description" />}</div>
+                    <div class="inventory-box">@if (items[1]){ <img [src]="items[1].image" alt="item" [matTooltip]="items[1].description" />}</div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>

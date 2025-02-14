@@ -1,0 +1,54 @@
+<div id="add-card" (click)="openDialog()">
+    <mat-card>
+        <mat-card-title>Nouveau jeu</mat-card-title>
+        <mat-icon>add_circle</mat-icon>
+    </mat-card>
+</div>
+<ng-template #createGameDetailDialog>
+    <div class="container">
+        <h1 align="center">Nouveau Jeu</h1>
+        <div class="form-container">
+            <div class="game-mode-bloc">
+                <h2>Mode de jeu</h2>
+                <div class="radio-mode-btn-group">
+                    @for(mode of gameModeOptions; track mode) {
+                    <div class="option">
+                        <label>
+                            <input type="radio" name="mode" [value]="mode" [(ngModel)]="selectedMode" />
+                            <span>@if(mode === 'Flag') {Mode CTF} @else {Mode Classique} </span>
+                        </label>
+                    </div>
+                    }
+                </div>
+                <div class="border-line"></div>
+            </div>
+            <div class="game-map-size-bloc">
+                <h2>Taille de la Map</h2>
+                <div class="radio-size-btn-group">
+                    @for(size of mapSizeOptions;track size){
+                    <div class="option">
+                        <label class="option">
+                            <input type="radio" name="size" [value]="size" [(ngModel)]="selectedSize" />
+                            <span>{{ size }}X{{ size }} </span>
+                        </label>
+                        <div class="tooltip">
+                            <div class="tooltip-body">
+                                Nombres d'items au maximun:{{ itemsOptions[$index] }}<br />Nombres de joueurs au maximun:{{ playersOptions[$index] }}
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+                <div class="border-line"></div>
+            </div>
+            <mat-dialog-actions align="center">
+                <button matRipple [matRippleCentered]="true" mat-button mat-dialog-close class="cancel-btn">
+                    <span>Annuler</span>
+                </button>
+                <button matRipple [matRippleCentered]="true" mat-button mat-dialog-close class="confirm-btn" (click)="onConfirm()">
+                    <span>Créer</span>
+                </button>
+            </mat-dialog-actions>
+        </div>
+    </div>
+</ng-template>

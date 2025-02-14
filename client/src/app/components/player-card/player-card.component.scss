@@ -1,0 +1,149 @@
+@import '../../../styles/var.scss';
+
+#player-statistics-container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    row-gap: 5px;
+    #player-statistics {
+        font-family: $font-itim;
+        #avatar {
+            display: flex;
+            height: 135px;
+            overflow-y: hidden;
+            padding: 5px;
+            background-color: whitesmoke;
+            column-gap: 5px;
+            img {
+                width: 120px;
+                height: 100%;
+                background-color: $brown-light;
+                border-radius: 10px;
+            }
+
+            ul {
+                flex: 1;
+                padding: 0;
+                margin: 0;
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                row-gap: 5px;
+
+                li {
+                    display: flex;
+                    justify-content: start;
+                    align-items: center;
+                    column-gap: 5px;
+                    background-color: $brown-light;
+                    padding: 5px;
+                    border-radius: 10px;
+
+                    img {
+                        height: 18px;
+                        width: 18px;
+                    }
+
+                    .stat {
+                        flex: 1;
+                        height: 10px;
+                        background-color: white;
+                        border-radius: 10px;
+                        overflow: hidden;
+                        flex: 1;
+
+                        .value-0,
+                        .value-1,
+                        .value-2,
+                        .value-3,
+                        .value-4,
+                        .value-5,
+                        .value-6 {
+                            height: 100%;
+                            background-color: $kaki;
+                            border-radius: 10px;
+                        }
+
+                        .value-0 {
+                            width: 0;
+                        }
+
+                        .value-1 {
+                            width: calc(100% * 1 / 6);
+                        }
+
+                        .value-2 {
+                            width: calc(100% * 2 / 6);
+                        }
+
+                        .value-3 {
+                            width: calc(100% * 3 / 6);
+                        }
+
+                        .value-4 {
+                            width: calc(100% * 4 / 6);
+                        }
+
+                        .value-5 {
+                            width: calc(100% * 5 / 6);
+                        }
+
+                        .value-6 {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+
+        #attribute-inventory {
+            display: flex;
+            column-gap: 5px;
+            padding: 0 10px 10px;
+            ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                padding-top: 25px;
+                flex: 2;
+            }
+
+            .center {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                
+                p {
+                    font-weight: 400;
+                    font-size: 20px;
+                }
+            }
+
+            #inventory-container {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                column-gap: 15px;
+
+                .inventory-box {
+                    background-color: $brown-light;
+                    border: 2px solid $brown-dark;
+                    border-radius: 10px;
+                    width: 65px;
+                    height: 65px;
+                    padding: 2px;
+                    box-shadow:
+                        0 4px 8px 0 rgba(0, 0, 0, 0.1),
+                        0 6px 20px 0 rgba(0, 0, 0, 0.1);
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
+        }
+    }
+}

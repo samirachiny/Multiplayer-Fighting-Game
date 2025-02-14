@@ -1,0 +1,83 @@
+<div id="game-page">
+    <main>
+        @if(isPartyInitialized){ 
+        @if(isPartyEnded && winner){
+            <div id="show-winner">
+                <h1>La partie est terminée</h1>
+                <h2>Le gagnant est: {{ winner.name }}</h2>
+                <img [src]="winner.character.imagePath" alt="Image du personnage du gagnant" />
+            </div>
+        }
+        @if(isCountDownStarting){
+        <div id="countdown">
+            @if(timeBeforeStart === 0){
+            <h1>@if(isBeginning){Debut de la partie}@else{Fin de tour}</h1>
+            }@else {
+            <h3>@if(currentPlayerName === player.name){C'est votre tour}@else{C'est le tour de {{ currentPlayerName }}}</h3>
+            <p>{{ timeBeforeStart }}</p>
+            }
+        </div>
+        } @if(isFighting){
+        <div id="fighting-view">
+            <app-fight-view [playerId]="player.pid"></app-fight-view>
+        </div>
+        }
+        <div id="game-panel-left">
+            @if(isDebugMode) {<p id="debug-mode-state">Mode débogage activé</p>}
+            <div id="game-features" class="card">
+                <h2>Informations sur la partie</h2>
+                <ul>
+                    <li><mat-icon>sports_esports</mat-icon> Nom du jeu: {{ game.name }}</li>
+                    <li><mat-icon>map</mat-icon> Taille de la carte: {{ game.mapSize }} x {{ game.mapSize }}</li>
+                    <li><mat-icon>groups</mat-icon> Nombre de joueurs: {{ players.length }}</li>
+                    <li><mat-icon>person</mat-icon> Joueur actif: {{ currentPlayerName }}</li>
+                </ul>
+            </div>
+            <app-player-card></app-player-card>
+            <app-chronometer></app-chronometer>
+        </div>
+        <div id="game-panel-middle">
+            <app-game-map></app-game-map>
+            <div id="btn-group">
+                <button
+                    matRipple
+                    [matRippleCentered]="true"
+                    class="btn"
+                    [ngClass]="{ 'btn-disabled': player && !player.isCurrentPlayer }"
+                    (click)="onEndRound()"
+                    [disabled]="player && !player.isCurrentPlayer"
+                >
+                    <span>Fin de tour</span><img alt="Temps" src="assets/img/time.webp" />
+                </button>
+                <button
+                    matRipple
+                    [matRippleCentered]="true"
+                    class="btn"
+                    [ngClass]="{ 'btn-disabled': player && (!player.isCurrentPlayer || player.remainingAction === 0) }"
+                    (click)="onEnabledInteractionWithMap()"
+                    [disabled]="player && (!player.isCurrentPlayer || player.remainingAction === 0)"
+                >
+                    <span>Actions</span><img alt="Action" src="assets/img/action.webp" />
+                </button>
+                <button matRipple [matRippleCentered]="true" class="btn" (click)="onGiveUp()">
+                    <span>Abandonner</span><img alt="Abandonner" src="assets/img/give-up.webp" />
+                </button>
+            </div>
+        </div>
+        <div id="game-panel-right">
+            @if(player){<app-list-player [playerId]="player.pid"></app-list-player>}
+            <div id="tab-group" [ngStyle]="{ 'max-height': 'calc(100vh - 140px - ' + players.length * 45 + 'px)' }">
+                <div id="btn-tab-group">
+                    <button [ngClass]="{ 'btn-tab-active': isShowMessages }" (click)="toggleTab(true)">Messages</button>
+                    <button [ngClass]="{ 'btn-tab-active': !isShowMessages }" (click)="toggleTab(false)">Journal</button>
+                </div>
+                <div id="tab-group-container">
+                    @if(isShowMessages){
+                    <app-chat [showImage]="false"></app-chat>
+                    }@else{ @if(player){<app-game-log [playerId]="player.pid"></app-game-log>} }
+                </div>
+            </div>
+        </div>
+        }
+    </main>
+</div>

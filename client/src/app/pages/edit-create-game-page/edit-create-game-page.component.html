@@ -1,0 +1,40 @@
+<div id="edit-page">
+    <audio autoplay loop>
+        <source src="./assets/audio/Vue-edition.mp3" type="audio/mp3" />
+        Votre navigateur ne supporte pas l'élément audio
+    </audio>
+    <app-header pageTitle="Édition de jeu"></app-header>
+    @if(isLoading){
+    <div id="spinner">
+        <mat-spinner></mat-spinner>
+    </div>
+    }@else{
+    <main>
+        <app-map-editor [gameMapEditor]="gameMapEditor" (mapChanged)="onMapChanged($event)" (mapReset)="onMapReset($event)"></app-map-editor>
+        <div id="game-info-container">
+            <form #form="ngForm" (ngSubmit)="handleSaveGame(form)">
+                <h2>Informations du jeu</h2>
+                <label class="form-label">Nom du jeu: </label>
+                <input title="Name" class="form-input" type="text" name="name" [(ngModel)]="name" required (drop)="onDropInput($event)" maxlength="20" />
+                <label class="form-label">Description: </label>
+                <textarea title="Description"
+                    class="form-textarea"
+                    name="description"
+                    [(ngModel)]="description"
+                    required
+                    (drop)="onDropInput($event)"
+                    maxlength="200"
+                ></textarea>
+                @if(form.submitted && !form.valid){
+                <p class="form-error">Les champs nom et description sont requis. Veuillez les remplir s'il vous plaît</p>
+                }
+                <button matRipple [matRippleCentered]="true" [ngClass]="{ btn: !isGameSubmitted, 'btn-disabled': isGameSubmitted }" type="submit" [disabled]="isGameSubmitted">
+                    Enregistrer
+                </button>
+            </form>
+            <button matRipple [matRippleCentered]="true" class="btn" (click)="onOpenCancelConfirmation()">Annuler</button>
+        </div>
+    </main>
+
+    }
+</div>

@@ -1,0 +1,16 @@
+export enum HttpStatusCode {
+    Success = 200,
+    Created = 201,
+    Accepted = 202,
+    BadRequest = 400,
+    NotFound = 404,
+    NotContent = 204,
+    InternalServerError = 500,
+    Forbidden = 403,
+    Unauthorized = 401,
+    NotImplemented = 501,
+    UnprocessableEntity = 422,
+    TooManyRequest = 429,
+    MethodNotAllowed = 405,
+    NotModified = 304,
+}

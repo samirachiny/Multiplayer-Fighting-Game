@@ -1,0 +1,58 @@
+@import '../../../styles/var.scss';
+
+#admin-page {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    font-family: $font-itim;
+    height: 100%;
+}
+main {
+    $background-admin: '../../../assets/img/backgrounds/background-admin.png';
+    flex: 1;
+    background: url($background-admin) lightgray 50% / cover no-repeat;
+    position: relative;
+}
+#loading-true {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#game-logo {
+    width: 78px;
+    height: 78px;
+    margin-left: 5px;
+}
+
+#game-list-box {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+
+    .game-card,
+    .add-card {
+        width: 20%;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    .empty {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+
+        p {
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0.3);
+            padding: 50px;
+            border-radius: 8px;
+        }
+    }
+}

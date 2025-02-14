@@ -1,0 +1,51 @@
+@import '../../../styles/var.scss';
+
+h2 {
+    width: 100%;
+    text-align: center;
+    color: $brown-dark;
+    margin: 0px;
+    padding: 10px 0px;
+    background-color: $kaki;
+    color: white;
+    border-radius: 10px;
+    font-family: $font-itim;
+}
+
+table {
+    width: 100%;
+    background-color: $brown-light;
+    font-family: $font-itim;
+    border-radius: 10px;
+    table-layout: fixed;
+    border-collapse: collapse;
+
+    .mat-mdc-row {
+        height: auto !important;
+        padding: 10px 0px;
+    }
+
+    #player-name {
+        color: $red-light;
+        font-size: 20px;
+        background-color: wheat;
+    }
+
+    th,
+    td {
+        text-align: center;
+    }
+
+    th.mat-sort-header {
+        background-color: white;
+        color: $brown-dark;
+        font-family: $font-itim;
+        font-size: 18px;
+    }
+
+    td {
+        color: $brown-dark;
+        font-family: $font-itim;
+        border-bottom: 1px solid white;
+    }
+}

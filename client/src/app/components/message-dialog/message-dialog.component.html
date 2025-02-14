@@ -1,0 +1,20 @@
+<div id="container">
+    <h1 align="center">
+        {{ data.title }}
+        <mat-icon id="title-{{ data.type }}">{{ data.type }}</mat-icon>
+    </h1>
+    <div class="diag-content">
+        <mat-dialog-content>
+            <p>{{ data.body }}</p>
+            @for (infos of data.optionals; let index = $index ; track index ) {
+            <p>{{ infos }}</p>
+            }
+        </mat-dialog-content>
+        <div></div>
+    </div>
+    <mat-dialog-actions align="center">
+        <button  mat-dialog-close cdkFocusInitial class="confirm-btn">
+            <span>D'accord</span>
+        </button>
+    </mat-dialog-actions>
+</div>

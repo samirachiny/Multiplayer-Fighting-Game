@@ -1,0 +1,23 @@
+<div class="journal-container">
+    <div class="filter-header">
+        <div class="filter">
+            <span>Filtrer</span>
+            <img src="./assets/img/filtre.png" alt="filter icon">
+        </div>
+        <div class="filter-options">
+            <input type="checkbox" id="mine" name="mine" value="mine" (change)="applyFilter()" [(ngModel)]="filterMine">
+            <label for="mine"> Mon historique</label>
+        </div>
+    </div>
+    <div class="logs-container">
+        @for (log of filteredLogs; let idx=$index; track idx) {
+            <div class="log">
+                <img class="log-icon" [src]="getImage(log)" alt="combat icon">
+                <div class="log-body">
+                    <div class="log-time"> [{{ log.time | date: 'HH:mm:ss'}}]</div>
+                    <div class="log-message"> {{ log.message }}</div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

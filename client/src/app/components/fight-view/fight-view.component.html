@@ -1,0 +1,195 @@
+<div id="fight-view-container">
+    @if(!isLoading){
+    <div id="fight-view">
+        <h1>{{ myFighter.name }} VS {{ opponentFighter.name }}</h1>
+        <div id="fight-container">
+            <div class="player-stat">
+                <div class="stat">
+                    <img src="./assets/img/attributes/life.png" alt="vie" />
+                    <div class="stat-container">
+                        <div [class]="'life value-' + myFighter.life"></div>
+                    </div>
+                    {{ myFighter.life }}
+                </div>
+                <div class="stat">
+                    <img src="./assets/img/attributes/attack.png" alt="attaque" />
+                    <div class="stat-container">
+                        <div [class]="'attack value-' + myFighter.attack"></div>
+                    </div>
+                    {{ myFighter.attack }}
+                </div>
+                <div class="stat">
+                    <img src="./assets/img/attributes/defense.png" alt="defense" />
+                    <div class="stat-container">
+                        <div [class]="'defense value-' + myFighter.defense"></div>
+                    </div>
+                    {{ myFighter.defense }}
+                </div>
+                <div class="items">
+                    @if(myFighter.hasSecondChanceEffect){
+                    <img
+                        class="item"
+                        src="./assets/img/items/second-chance-item.png"
+                        alt="item"
+                        title="augmente 2 points de vie durant le combat si ta vie est à 1"
+                    />
+                    } @if(myFighter.hasSwapOpponentLifeEffect){
+                    <img
+                        class="item"
+                        src="./assets/img/items/swap-opponent-life-item.png"
+                        alt="item"
+                        title="permute tes points de vie et ceux de ton adversaire lorsqu'il te reste 2 point de vie"
+                    />
+                    }
+                </div>
+                <div class="avatar">
+                    @if(!isAttacker && isAttackSuccessful){
+                    <p class="damage">-1</p>
+                    }
+                    <img [ngClass]="isAttacker ? 'attacker' : 'defender'" [src]="myFighter.character.imagePath" alt="avatar du personnage" />
+                    <p>@if(isAttacker){Attaquant}@else{Défenseur}</p>
+                </div>
+                <div class="dice-container">
+                    <div>
+                        <app-dice
+                            [ngClass]="{ 'dice-hidden': !isAttacker }"
+                            [dice]="myFighter.diceAssignment.attack"
+                            [playerId]="myFighter.pid"
+                        ></app-dice>
+                    </div>
+                    <div>
+                        <app-dice
+                            [ngClass]="{ 'dice-hidden': isAttacker }"
+                            [dice]="myFighter.diceAssignment.defense"
+                            [playerId]="myFighter.pid"
+                        ></app-dice>
+                    </div>
+                </div>
+                <p class="result">
+                    @if(showResult && myDiceRollResult){ Résultat({{ myDiceRollResult.type === myFighter.diceAssignment.attack ? 'ATK' : 'DF' }} +
+                    bonus) :
+                    {{
+                        myDiceRollResult.type === myFighter.diceAssignment.attack
+                            ? myFighter.attack + myDiceRollResult.result
+                            : myFighter.defense + myDiceRollResult.result
+                    }}}
+                </p>
+            </div>
+            <div id="versus">
+                <p>{{ remainTime }}s</p>
+                <img src="./assets/img/versus.png" alt="versus" />
+                <div></div>
+            </div>
+            <div class="player-stat">
+                <div class="stat">
+                    <img src="./assets/img/attributes/life.png" alt="vie" />
+                    <div class="stat-container">
+                        <div [class]="'life value-' + opponentFighter.life"></div>
+                    </div>
+                    {{ opponentFighter.life }}
+                </div>
+                <div class="stat">
+                    <img src="./assets/img/attributes/attack.png" alt="attaque" />
+                    <div class="stat-container">
+                        <div [class]="'attack value-' + opponentFighter.attack"></div>
+                    </div>
+                    {{ opponentFighter.attack }}
+                </div>
+                <div class="stat">
+                    <img src="./assets/img/attributes/defense.png" alt="defense" />
+                    <div class="stat-container">
+                        <div [class]="'defense value-' + opponentFighter.defense"></div>
+                    </div>
+                    {{ opponentFighter.defense }}
+                </div>
+                <div class="items">
+                    @if(opponentFighter.hasSecondChanceEffect){
+                    <img
+                        class="item"
+                        src="./assets/img/items/second-chance-item.png"
+                        alt="item"
+                        title="augmente 2 points de vie durant le combat si ta vie est à 1"
+                    />
+                    } @if(opponentFighter.hasSwapOpponentLifeEffect){
+                    <img
+                        class="item"
+                        src="./assets/img/items/swap-opponent-life-item.png"
+                        alt="item"
+                        title="permute tes points de vie et ceux de ton adversaire lorsqu'il te reste 2 point de vie"
+                    />
+                    }
+                </div>
+                <div class="avatar">
+                    @if(isAttacker && isAttackSuccessful){
+                    <p class="damage">-1</p>
+                    }
+                    <img [ngClass]="!isAttacker ? 'attacker' : 'defender'" [src]="opponentFighter.character.imagePath" alt="avatar du personnage" />
+                    <p>@if(!isAttacker){Attaquant}@else{Défenseur}</p>
+                </div>
+                <div class="dice-container">
+                    <div>
+                        <app-dice
+                            [ngClass]="{ 'dice-hidden': isAttacker }"
+                            [dice]="opponentFighter.diceAssignment.attack"
+                            [playerId]="opponentFighter.pid"
+                        ></app-dice>
+                    </div>
+                    <div>
+                        <app-dice
+                            [ngClass]="{ 'dice-hidden': !isAttacker }"
+                            [dice]="opponentFighter.diceAssignment.defense"
+                            [playerId]="opponentFighter.pid"
+                        ></app-dice>
+                    </div>
+                </div>
+                <p class="result">
+                    @if(showResult && opponentDiceRollResult){ Résultat({{
+                        opponentDiceRollResult.type === opponentFighter.diceAssignment.attack ? 'ATK' : 'DF'
+                    }}
+                    + bonus) :
+                    {{
+                        opponentDiceRollResult.type === opponentFighter.diceAssignment.attack
+                            ? opponentFighter.attack + opponentDiceRollResult.result
+                            : opponentFighter.defense + opponentDiceRollResult.result
+                    }}}
+                </p>
+            </div>
+        </div>
+        <div id="footer">
+            <p>Nombre de Tentatives d'évasion restantes: {{ myFighter.remainEscape }}</p>
+            <div id="btn-group">
+                <button
+                    matRipple
+                    [matRippleCentered]="true"
+                    class="btn"
+                    [ngClass]="{ 'btn-disabled': !isAttacker || isActionCompleted || remainTime === 0 }"
+                    [disabled]="!isAttacker || isActionCompleted || remainTime === 0"
+                    (click)="onAttack()"
+                >
+                    <span>Attaquer</span><img src="assets/img/action.webp" alt="attaquer" />
+                </button>
+                <button
+                    matRipple
+                    [matRippleCentered]="true"
+                    class="btn"
+                    [ngClass]="{ 'btn-disabled': !isAttacker || isActionCompleted || myFighter.remainEscape === 0 || remainTime === 0 }"
+                    [disabled]="!isAttacker || isActionCompleted || myFighter.remainEscape === 0 || remainTime === 0"
+                    (click)="onEscape()"
+                >
+                    <span>S'évader</span><img src="assets/img/logs/escape-from.png" alt="s'évader" />
+                </button>
+                <button
+                    matRipple
+                    [matRippleCentered]="true"
+                    class="btn"
+                    [ngClass]="{ 'btn-disabled': isActionCompleted || remainTime === 0 }"
+                    [disabled]="isActionCompleted || remainTime === 0"
+                    (click)="onGiveUp()"
+                >
+                    <span>Abandonner</span><img src="assets/img/give-up.webp" alt="abandonner" />
+                </button>
+            </div>
+        </div>
+    </div>
+    }
+</div>

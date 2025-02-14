@@ -1,0 +1,64 @@
+@import '../../../styles/var.scss';
+
+h3 {
+    font-family: $font-itim;
+    font-size: 25px;
+    color: $brown-light;
+    text-align: center;
+}
+
+#item-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 15px;
+    background-color: $brown-light;
+    padding: 15px;
+    border: 7px solid $brown-dark;
+}
+
+.item-tool-tip {
+    color: $brown-light;
+    margin-left: 5px;
+    font-family: $font-itim;
+    background-color: $gray-transparent;
+}
+
+.item, .item-disabled {
+    cursor: pointer;
+    height: 75px;
+    transition: transform 0.1s ease-in-out;
+    border: 4px solid $brown-dark;
+    position: relative;
+    padding: 2px;
+
+    p {
+        margin: 0px;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        font-size: 20px;
+        font-family: $font-itim;
+        background-color: $brown-dark;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.item-disabled{
+    opacity: 0.2;
+}
+
+.item:hover {
+    transform: scale(1.1);
+}
+

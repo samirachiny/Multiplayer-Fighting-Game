@@ -1,0 +1,286 @@
+@import '../../../styles/var.scss';
+
+#game-page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin-bottom: 0px;
+    main {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-height: 100vh;
+        flex: 1;
+        background-color: $brown-light;
+
+        #countdown,
+        #fighting-view, #show-winner {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: $font-itim;
+            color: $brown-dark;
+            z-index: 100;
+            row-gap: 10px;
+        }
+
+        #show-winner{
+            left: calc(30%);
+            right: calc(70% - 610px);
+            backdrop-filter: blur(20px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;            
+            img{
+                width: 200px;
+                height: 250px;
+            }
+        }
+
+        #fighting-view {
+            left: 0;
+            width: calc(30% + 610px);
+            height: 100%;
+            backdrop-filter: blur(5px);
+
+            app-fight-view {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        #countdown {
+            left: calc(30%);
+            right: calc(70% - 610px);
+            h1, h3{
+                padding: 0;
+                margin: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+            }
+
+            h1{
+                font-size: 60px;
+            }
+
+            h3{
+                font-size: 36px;
+            }
+
+            p {
+                border: 5px solid $brown-dark;
+                font-size: 100px;
+                height: 250px;
+                width: 250px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 100%;
+                border-style: double;
+                background-color: $brown-light;
+                padding: 0;
+                margin: 0;
+            }
+        }
+
+        #game-panel-left {
+            padding: 10px;
+            margin: 0;
+            display: flex;
+            justify-content: start;
+            flex-direction: column;
+            align-items: center;
+            row-gap: 5px;
+            width: 30%;
+            height: calc(100vh - 20px);
+
+            #debug-mode-state {
+                background-color: $kaki;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 10px;
+                margin: 0;
+                width: calc(100% - 20px);
+                color: white;
+                font-family: $font-itim;
+                font-size: 28px;
+                font-weight: 800;
+                border: 2px solid $brown-dark;
+            }
+
+            #game-features {
+                width: 100%;
+                ul {
+                    list-style: none;
+                    margin: 0;
+                    display: flex;
+                    flex-direction: column;
+                    row-gap: 1px;
+                    padding: 7px;
+
+                    li {
+                        display: flex;
+                        justify-content: start;
+                        align-items: center;
+                        column-gap: 10px;
+                        border: 3px solid $brown-light;
+                        padding: 4px;
+                        font-size: 20px;
+                    }
+                }
+            }
+
+            app-player-card,
+            app-chronometer {
+                width: 100%;
+            }
+        }
+
+        #game-panel-middle {
+            padding: 10px;
+            height: calc(100vh - 20px);
+            width: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+            margin: 0;
+            row-gap: 25px;
+            app-game-map {
+                width: 100%;
+            }
+
+            #btn-group {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                column-gap: 5px;
+
+                .btn,
+                .btn-disabled {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    column-gap: 10px;
+                    flex: 1;
+                    border: 3px solid $brown-dark;
+                    border-radius: 10px;
+                    background-color: $green-light;
+                    padding: 5px;
+                    cursor: pointer;
+                    span {
+                        font-family: $font-itim;
+                        color: $brown-dark;
+                        font-size: 22px;
+                    }
+
+                    img {
+                        height: 35px;
+                        width: 35px;
+                    }
+
+                    &:hover {
+                        transform: scale(1.02);
+                        transition: transform ease-in-out 0.3s;
+                    }
+                }
+
+                .btn-disabled {
+                    background: gray;
+                }
+
+                .btn-disabled:hover {
+                    transform: none;
+                }
+            }
+        }
+
+        #game-panel-right {
+            padding: 10px;
+            width: calc(70% - 600px);
+            max-width: calc(70% - 600px);
+            height: calc(100vh - 20px);
+            margin: 0;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            flex-direction: column;
+            row-gap: 10px;
+
+            app-list-player {
+                width: 100%;
+                flex: 0 0 auto;
+            }
+
+            #tab-group {
+                font-family: $font-itim;
+                background-color: whitesmoke;
+                border-radius: 20px;
+                border: 2px solid $brown-dark;
+                display: flex;
+                align-items: center;
+                justify-content: start;
+                row-gap: 15px;
+                padding: 15px;
+                flex-direction: column;
+                width: calc(100% - 30px);
+                flex: 1 1 auto;
+
+                #btn-tab-group {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 40px;
+                    width: 100%;
+
+                    button {
+                        width: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background-color: whitesmoke;
+                        border: none;
+                        border-top-left-radius: 20px;
+                        border-top-right-radius: 20px;
+                        color: $kaki;
+                        font-size: 20px;
+                        font-family: $font-itim;
+                        padding: 15px;
+
+                        &:hover {
+                            color: white;
+                            background-color: $kaki;
+                        }
+                    }
+
+                    .btn-tab-active {
+                        background-color: $kaki;
+                        color: white;
+                    }
+                }
+
+                #tab-group-container {
+                    width: 100%;
+                    height: calc(100% - 60px);
+                    padding: 5px;
+                    app-chat {
+                        height: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
