@@ -1,4 +1,6 @@
-Jeu de combat tactique Multijouers. La version déployé est sur : http://polytechnique-montr-al.gitlab.io/log2990/20243/equipe-203/LOG2990-203/#/home 
+Jeu de combat tactique Multijouers.
+
+La version déployé est sur : http://polytechnique-montr-al.gitlab.io/log2990/20243/equipe-203/LOG2990-203/#/home 
 
 Description : 
 
